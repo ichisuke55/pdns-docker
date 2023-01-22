@@ -14,6 +14,11 @@ services:
       - powerdns:/var/lib/powerdns
       - ./pdns-auth.d/pdns.conf:/etc/powerdns/pdns.d/pdns.conf
     restart: always
+    logging:
+      driver: json-file
+      options:
+        max-size: 1m
+        max-file: '3'
 
   admin:
     image: powerdnsadmin/pda-legacy:latest
@@ -25,6 +30,11 @@ services:
     volumes:
       - powerdnsadmin-data:/data
     restart: always
+    logging:
+      driver: json-file
+      options:
+        max-size: 1m
+        max-file: '3'
 
   recursor:
     image: powerdns/pdns-recursor-master
@@ -37,6 +47,11 @@ services:
     volumes:
       - ./recursor.d/pdns-recursor.conf:/etc/powerdns/recursor.d/pdns-recursor.conf
     restart: always
+    logging:
+      driver: json-file
+      options:
+        max-size: 1m
+        max-file: '3'
 
 volumes:
   powerdns:
