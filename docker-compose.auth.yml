@@ -9,7 +9,8 @@ services:
       net:
         ipv4_address: 172.18.0.2
     ports:
-      - "8081:8081"
+      - "53:53"
+      - "53:53/udp"
     volumes:
       - powerdns:/var/lib/powerdns
       - ./pdns-auth.d/pdns.conf:/etc/powerdns/pdns.d/pdns.conf
@@ -29,23 +30,6 @@ services:
       - "80:80"
     volumes:
       - powerdnsadmin-data:/data
-    restart: always
-    logging:
-      driver: json-file
-      options:
-        max-size: 1m
-        max-file: '3'
-
-  recursor:
-    image: powerdns/pdns-recursor-master
-    container_name: pdns-recursor
-    networks:
-      net:
-    ports:
-      - "53:53"
-      - "53:53/udp"
-    volumes:
-      - ./recursor.d/pdns-recursor.conf:/etc/powerdns/recursor.d/pdns-recursor.conf
     restart: always
     logging:
       driver: json-file
