@@ -21,7 +21,7 @@ services:
         max-file: '3'
 
   admin:
-    image: powerdnsadmin/pda-legacy:latest
+    image: powerdnsadmin/pda-legacy:v0.4.1
     container_name: pdns-admin
     networks:
       net:
